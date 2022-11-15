@@ -3,17 +3,20 @@ package com.example.myapplication
 import android.os.Parcel
 import android.os.Parcelable
 
-data class CajaAhorro(val parcel: Parcel) : Cuentas(), Parcelable {
+data class CajaAhorro( var numerodecuenta: Int ,
+                       var dni: Int ,
+                       var saldo: Double ,
+                       var Titular: String ) : Cuentas(
+), Parcelable {
 
-//
- override fun whriteparcel(parcel: Parcel, flags: Int){
-  parcel.writeInt(dni)
-  parcel.writeInt(numerodecuenta)
-  parcel.writeString(Titular)
-  parcel.writeDouble(saldo)
 
+ constructor(parcel: Parcel) : this(
+  parcel.readInt(),
+  parcel.readInt(),
+  parcel.readDouble(),
+  parcel.readString().toString()
+ ) {
  }
-
 
  override fun Depositar(monto: Double):Double {
   this.saldo=this.saldo+monto
